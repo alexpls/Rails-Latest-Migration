@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "Rails Latest Migration: Open latest Rails migration",
+        "command": "rails_latest_migration"
+    }
+]
