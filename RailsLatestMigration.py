@@ -42,7 +42,12 @@ class RailsLatestMigrationCommand(sublime_plugin.TextCommand):
 	def parent_path(self, path):
 		return os.path.abspath(os.path.join(path, '..'))
 
-class NotRailsApp(Exception):
+class Error(Exception):
+	def __init__(self, msg):
+		self.msg = msg
+		sublime.error_message(self.msg)
+
+class NotRailsApp(Error):
 	pass
-class UnsavedFile(Exception):
+class UnsavedFile(Error):
 	pass
