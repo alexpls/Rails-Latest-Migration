@@ -4,7 +4,8 @@ Opens the latest migration created in a Ruby on Rails app.
 
 ##Usage
 
-Easy! 
+Easy!
+
 1. Open any file in your Rails app.
 2. Bring up your command pallette (Cmd + Shift + P / Ctrl + Shift + P) and type in:
 ```
