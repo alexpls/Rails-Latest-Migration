@@ -4,6 +4,10 @@ import re
 
 class RailsLatestMigrationCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
+		# Check to see if current file is saved to the file system
+		if self.view.file_name() == None:
+			raise UnsavedFile("Cannot execute Rails Latest Migration on an unsaved file.")
+
 		cur_path = self.parent_path(self.view.file_name())
 		root = self.find_ror_root(cur_path)
 
@@ -27,7 +31,7 @@ class RailsLatestMigrationCommand(sublime_plugin.TextCommand):
 		# root directory! At this stage it's safe to assume that we won't come
 		# across a familiar directory structure for a Rails app.
 		if path == '/':
-			raise NotRailsApp
+			raise NotRailsApp("Cannot recognize this file structure as a Rails app")
 
 		if len([x for x in expected_items if x in files]) == len(expected_items):
 			return path
@@ -39,4 +43,6 @@ class RailsLatestMigrationCommand(sublime_plugin.TextCommand):
 		return os.path.abspath(os.path.join(path, '..'))
 
 class NotRailsApp(Exception):
+	pass
+class UnsavedFile(Exception):
 	pass
