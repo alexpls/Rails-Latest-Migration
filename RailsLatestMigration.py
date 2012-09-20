@@ -2,14 +2,20 @@ import sublime, sublime_plugin
 import os
 import re
 
-class RailsLatestMigrationCommand(sublime_plugin.TextCommand):
-	def run(self, edit):
-		# Check to see if current file is saved to the file system
-		if self.view.file_name() == None:
-			raise UnsavedFile("Cannot execute Rails Latest Migration on an unsaved file.")
+class RailsLatestMigrationCommand(sublime_plugin.WindowCommand):
+	def run(self):
+		try:
+			# Try to get a path from the currently open file.
+			cur_path = self.window.active_view().file_name()
+		except AttributeError:
+			# If no file is open, try to get it from the currently open folders.
+			if self.window.folders():
+				cur_path = self.window.folders()[0]
 
-		cur_path = self.parent_path(self.view.file_name())
-		root = self.find_ror_root(cur_path)
+		if cur_path:
+			root = self.find_ror_root(self.parent_path(cur_path))
+		else:
+			raise NothingOpen("Please open a file or folder in order to search for the latest migration")
 
 		if root:
 			migrations_dir = os.path.join(root, 'db', 'migrate')
@@ -19,7 +25,7 @@ class RailsLatestMigrationCommand(sublime_plugin.TextCommand):
 			migrations = sorted([m for m in migrations if pattern.match(m)])
 			latest_migration = os.path.join(migrations_dir, migrations[-1])
 
-			self.view.window().open_file(latest_migration)
+			self.window.open_file(latest_migration)
 
 	# Recursively searches each up a directory structure for the 
 	# expected items that are common to a Rails application.
@@ -49,5 +55,5 @@ class Error(Exception):
 
 class NotRailsApp(Error):
 	pass
-class UnsavedFile(Error):
+class NothingOpen(Error):
 	pass
