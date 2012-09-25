@@ -13,7 +13,9 @@ class RailsLatestMigrationCommand(sublime_plugin.WindowCommand):
 				cur_path = self.window.folders()[0]
 
 		if cur_path:
-			root = self.find_ror_root(self.parent_path(cur_path))
+			if os.path.isfile(cur_path):
+				cur_path = os.path.dirname(cur_path)
+			root = self.find_ror_root(cur_path)
 		else:
 			raise NothingOpen("Please open a file or folder in order to search for the latest migration")
 
