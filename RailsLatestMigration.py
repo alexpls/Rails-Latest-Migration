@@ -8,7 +8,10 @@ class RailsLatestMigrationCommand(sublime_plugin.WindowCommand):
 			# Try to get a path from the currently open file.
 			cur_path = self.window.active_view().file_name()
 		except AttributeError:
-			# If no file is open, try to get it from the currently open folders.
+			cur_path = None
+			
+		# If no file is open, try to get it from the currently open folders.
+		if cur_path == None:
 			if self.window.folders():
 				cur_path = self.window.folders()[0]
 
