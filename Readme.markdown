@@ -14,3 +14,6 @@ latest
 3. In no time the "Rails Latest Migration: Open latest Rails migration" should be highlighted, like so:
 ![Rails Latest Migration Screenshot](https://github.com/alexpls/Rails-Latest-Migration/raw/gh-pages/screenshots/screenshot_1.png)
 4. Hit enter, and lo and behold; your latest migration!
+
+## Atom.io
+If you're using atom.io, there's a version of this plugin for you too! Check out  [https://atom.io/packages/rails-latest-migration](https://atom.io/packages/rails-latest-migration).
