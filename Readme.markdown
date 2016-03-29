@@ -19,4 +19,4 @@ latest
 If you're using atom.io, there's a version of this plugin for you too! Check out  [https://atom.io/packages/rails-latest-migration](https://atom.io/packages/rails-latest-migration).
 
 ## License
-MIT
+The MIT License (MIT) - for more info see LICENSE.md
