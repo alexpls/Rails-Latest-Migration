@@ -17,3 +17,6 @@ latest
 
 ## Atom.io
 If you're using atom.io, there's a version of this plugin for you too! Check out  [https://atom.io/packages/rails-latest-migration](https://atom.io/packages/rails-latest-migration).
+
+## License
+MIT
